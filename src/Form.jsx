@@ -1,16 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Item from "./Item";
 import { v4 as uuidv4 } from "uuid";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { userSuccess } from "./user";
+import { AppContext } from "./Context";
 
 const Form = () => {
-  const [name, setName] = useState("");
-  // console.log()
-
-  const [data, setData] = useState([]);
-  // console.log(data)
+  const { name, setName, data, setData } = useContext(AppContext);
 
   const handlechange = (e) => {
     return setName(e.target.value);

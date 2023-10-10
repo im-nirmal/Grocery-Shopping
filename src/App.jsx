@@ -4,13 +4,17 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import Form from './Form'
 import Item from './Item'
+import Context from './Context'
 
 function App() {
-  const [count, setCount] = useState(0)
+  
 
   return (
-    <>
+    <><Context>
       <Form></Form>
+
+    </Context>
+     
       
     </>
   )

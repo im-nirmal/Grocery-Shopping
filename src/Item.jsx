@@ -1,39 +1,45 @@
-import React, { useState } from 'react'
-import { userError } from './user'
-import { ToastContainer, toast } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
+import React, { useContext, useState } from "react";
+import { userError } from "./user";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { AppContext } from "./Context";
 
-const Item = ({ele:{id,task},setData}) => {
+const Item = ({ ele: { id, task } }) => {
   // console.log(props);
 
-const [check, setCheck]= useState(false)
+  const { setData} = useContext(AppContext);
+  const [check, setCheck] = useState(false);
 
+  const handleClick = () => {
+    setData((prev) => {
+      return prev.filter((ele) => {
+        return ele.id !== id;
+      });
+    });
 
-  const handleClick =() =>{
-    setData((prev) =>{
-      return prev.filter((ele)=>{
-        return ele.id !== id
-      })
-    })
+    userError("Deleted Succesfully");
+  };
 
-      userError("Deleted Succesfully")
-  }
-
-
-  const handleCheck =(e) =>{
-    return setCheck(e.target.checked)
-  }
-
-
+  const handleCheck = (e) => {
+    return setCheck(e.target.checked);
+  };
 
   return (
     <div className="items">
-      <div className="single-item" >
-        <input type="checkbox" onChange={handleCheck} checked={check}/>
-        <p style={{textTransform: "capitalize", textDecoration: check ? "line-through" : "none"} }>{task}</p>
-        <button onClick={handleClick} type="button" className='btn-remove-btn'>Delete</button>
+      <div className="single-item">
+        <input type="checkbox" onChange={handleCheck} checked={check} />
+        <p
+          style={{
+            textTransform: "capitalize",
+            textDecoration: check ? "line-through" : "none",
+          }}
+        >
+          {task}
+        </p>
+        <button onClick={handleClick} type="button" className="btn-remove-btn">
+          Delete
+        </button>
       </div>
-
 
       {/* <ToastContainer
 position="top-center"
@@ -47,11 +53,8 @@ draggable
 pauseOnHover
 theme="dark"
 /> */}
-      
     </div>
+  );
+};
 
-    
-  )
-}
-
-export default Item
+export default Item;
